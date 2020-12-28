@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+    {{> head}}
+    <style>
+        #err-img{
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 15%;
+        }
+
+        .err{
+            text-align: center;
+            width:100%;
+            text-align:center;
+            position:absolute;
+            bottom:10%;
+            left:0px;
+
+        }
+    </style>
+    <body  class="err">
+    <div class="container">
+        <img src="../images/err.png" alt="{{pageTitle}}"  id="err-img"><br>
+        <h3 class="text-center">{{pageTitle}}</h3>
+        <hr>
+        <a class="btn btn-default btn-lg" href="/" role="button">Go home</a>
+    </div>
+</body>
+</html>

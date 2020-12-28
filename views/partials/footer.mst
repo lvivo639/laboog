@@ -1,0 +1,44 @@
+    <hr>
+<div class="container">
+    <div class="row">
+    <div class="col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">About us</h3>
+            </div>
+            <div class="panel-body">
+                The library operates according to the wiki
+                principle. This means that the addition of books,
+                authors and any other information is made by users.
+                Administration of the contents of the library is
+                not engaged in principle.
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-3">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Contact us</h3>
+            </div>
+            <div class="panel-body">
+                <a href="https://www.t.me/volmk" class="contact">
+                    Telegram<br>
+                </a>
+                Tel. 202 7233 2837<br>
+                E-mail: lvi.work1@gmail.com<br>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Visit us at</h3>
+            </div>
+            <div class="panel-body">
+                Box 564, Disneyland<br>
+                USA
+            </div>
+        </div>
+    </div>
+<div>

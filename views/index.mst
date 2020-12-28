@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+{{> head}}
+<body>
+{{> header}}
+<div class="container">
+    <div class="jumbotron">
+        <h1>Laboo</h1>
+        <p>
+            Independent library resource. As in any
+            library, please observe the cleanliness,
+            order and tranquility. Good people read
+            and work here.
+        </p>
+    <p>
+        {{^user}}
+            <a class="btn btn-primary btn-lg" href="/auth/register" role="button">Sign up</a>
+            <a class="btn btn-default btn-lg" href="/auth/login" role="button">Log in</a>
+        {{/user}}
+        {{#user}}
+            <a class="btn btn-primary btn-lg" href="/books" role="button">Books</a>
+            <a class="btn btn-default btn-lg" href="/collections" role="button">Collections</a>
+            {{^user.role}}
+                <form method="post" action="/fakeInfo">
+                    <button class="btn btn-info" type="submit">Fake info</button>
+                </form>
+            {{/user.role}}
+        {{/user}}
+        </p>
+    </div>
+</div>
+
+{{> footer}}
+</body>
+</html>

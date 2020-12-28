@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+    {{> head}}
+<body>
+    {{> header}}
+    <div class="container">
+        <h1>{{pageTitle}}</h1>
+        <form method="post" action="/collections/add">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input required type="text" class="form-control" id="name" name="name" placeholder="Name">
+            </div>
+            <div class="form-group">
+                <label for="about">About</label>
+                <textarea required name="about"  
+                    class="form-control" 
+                    id="about" rows="4" 
+                    placeholder="Write a little about the collection"></textarea>
+            </div>
+            
+            <select class="form-control" size="5" multiple name="books[]">
+            {{#Books}}
+                <option name="book" value="{{id}}">{{title}} by {{author}}</option>
+            {{/Books}}
+            </select>
+            <br>
+            <button type="submit" class="btn btn-default">Submit</button>
+        </form> 
+    </div>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<p>
+    <button type="button"
+            class="btn btn-default btn-sm"
+            onClick="dynamicInfo(1); return false;">
+        &laquo;
+    </button>
+
+    {{#beforePage}}
+        <button type="button"
+                class="btn btn-default btn-sm"
+                onClick="dynamicInfo({{.}}); return false;">
+            {{.}}
+        </button>
+    {{/beforePage}}
+
+    <button type="button"
+            class="btn btn-primary btn-sm"
+            onClick="dynamicInfo({{page}}); return false;">
+        {{page}}
+    </button>
+
+    {{#afterPage}}
+        <button type="button"
+                class="btn btn-default btn-sm"
+                onClick="dynamicInfo({{.}}); return false;">
+            {{.}}
+        </button>
+    {{/afterPage}}
+    <button type="button"
+            class="btn btn-default btn-sm"
+            onClick="dynamicInfo({{last}}); return false;">
+        &raquo;
+    </button>
+
+</p>
+
+<table class="table">
+    <tbody>
+    <th>ID</th>
+    <th>Login</th>
+    <th>Full name</th>
+    <th>Created</th>
+    </tbody>
+    {{#raw}}
+        <tr id={{_id}}>
+            <th>{{_id}}</th>
+            <th><a href="users/{{_id}}">{{login}}</a></th>
+            <th>{{fullname}}</th>
+            <th>{{created}}</th>
+        </tr>
+    {{/raw}}
+</table>
+
+
+
+

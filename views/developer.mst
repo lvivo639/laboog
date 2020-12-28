@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+{{> head}}
+<body>
+<style>
+    .bold{
+        font-weight: bold;
+    }
+</style>
+<div class="container">
+    <h1>{{pageTitle}}</h1>
+   {{#data}}
+       <h2>
+           <span class="label label-primary">{{method}}</span>
+           <span class="label label-danger">{{path}}</span>
+       </h2>
+       <h5>Access: <span class="bold">{{access}}</span></h5>
+       <h5>Returns: {{returnData}}</h5>
+
+        <h3>Parameters</h3>
+       <ul>
+           <li>
+               <h4>Path parameters:</h4>
+               {{^pathParams}}
+                   <p>No path params</p>
+               {{/pathParams}}
+               <ul>
+                   {{#pathParams}}
+                       <li>
+                           <span class="bold">{{param}}</span> : {{text}}
+                       </li>
+                   {{/pathParams}}
+               </ul>
+           </li>
+           <li>
+               <h4>Query params:</h4>
+               {{^queryParams}}
+                   <p>No query params</p>
+               {{/queryParams}}
+               <ul>
+                   {{#queryParams}}
+                       <li>
+                           <span class="bold">{{param}}</span> : {{text}}
+                       </li>
+                   {{/queryParams}}
+               </ul>
+           </li>
+           <li>
+               <h4>Body request:</h4>
+               {{^bodyReq}}
+                   <p>No body requests</p>
+               {{/bodyReq}}
+               <ul>
+                   {{#bodyReq}}
+                       <li>
+                           <span class="bold">{{param}}</span> : {{text}}
+                           <p>required: {{required}}</p>
+                           <p>type: {{type}}</p>
+                       </li>
+                   {{/bodyReq}}
+               </ul>
+           </li>
+       </ul>
+
+       <h4>Responses</h4>
+       <ul>
+           {{#responses}}
+               <li>
+                   <h5>Status: <span class="bold">{{status}}</span> --- {{text}}</h5>
+               </li>
+           {{/responses}}
+       </ul>
+       <hr>
+
+   {{/data}}
+
+</div>
+</body>
+</html>

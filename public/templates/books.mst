@@ -1,0 +1,83 @@
+{{#search}}
+    <h3>Search by: {{search}}</h3>
+    <hr/>
+{{/search}}
+
+<p>
+    <button type="button"
+            class="btn btn-default btn-sm"
+            onClick="dynamicInfo(1); return false;">
+        &laquo;
+    </button>
+
+    {{#beforePage}}
+        <button type="button"
+                class="btn btn-default btn-sm"
+                onClick="dynamicInfo({{.}}); return false;">
+            {{.}}
+        </button>
+    {{/beforePage}}
+
+    <button type="button"
+            class="btn btn-primary btn-sm"
+            onClick="dynamicInfo({{page}}); return false;">
+        {{page}}
+    </button>
+
+    {{#afterPage}}
+        <button type="button"
+                class="btn btn-default btn-sm"
+                onClick="dynamicInfo({{.}}); return false;">
+            {{.}}
+        </button>
+    {{/afterPage}}
+    <button type="button"
+            class="btn btn-default btn-sm"
+            onClick="dynamicInfo({{last}}); return false;">
+        &raquo;
+    </button>
+
+</p>
+
+
+<div class="row">
+    {{#raw}}
+        <div class="col-sm-6 col-md-4">
+            <div class="thumbnail">
+                <img src="{{image}}" alt="{{title}}" width="339" height="600">
+                <div class="caption">
+                    <h4>{{title}}</h4>
+                    <p>by {{author}}</p>
+                    <p>
+                        <small>Rating:</small>
+                    </p>
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" aria-valuenow="{{rating}}" aria-valuemin="0"
+                             aria-valuemax="100" style="width: {{rating}}%;">
+                            {{rating}}
+                        </div>
+                    </div>
+                    <form action="" method="">
+
+                        <button class="btn btn-primary"
+                                type="submit"
+                                formaction="/books/{{_id}}"
+                                formmethod="get">
+                            More..
+                        </button>
+
+                        <button class="btn btn-default"
+                                type="submit"
+                                formaction="{{buy}}"
+                                formmethod="get">Buy now
+                        </button>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    {{/raw}}
+    {{^raw}}
+        <h2>No Books</h2>
+    {{/raw}}
+</div>

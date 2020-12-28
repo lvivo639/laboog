@@ -1,0 +1,51 @@
+
+<nav class="navbar sticky-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span> 
+            </button>
+            <a class="navbar-brand" href="/"><i class="fas fa-feather-alt"></i> Laboo</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+        
+            <ul class="nav navbar-nav">
+                {{#user}}
+                            <li><a href="/books"><i class="fas fa-book"></i> Books</a></li>
+                            <li><a href="/collections"><i class="fas fa-layer-group"></i> Collections</a></li>
+                    {{^user.role}}
+                        <li><a href="/users"><i class="fas fa-users"></i> People</a></li>
+                    {{/user.role}}
+                {{/user}}
+                
+            </ul>
+            
+            <ul class="nav navbar-nav navbar-right">
+                {{^user}}
+                    <li><a href="/auth/register"><i class="fas fa-user"></i> Sign Up</a></li>
+                    <li><a href="/auth/login"><i class="fas fa-sign-in-alt"></i> Login</a></li>
+                {{/user}}
+                {{#user}}
+                    <li><a href="/profile"><i class="fas fa-user"></i> {{user.login}}</a></li>
+                    <li><a href="/auth/logout"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+
+                    <!--<li>-->
+                        <!--<li class="dropdown">-->
+                            <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">-->
+                                <!--<i class="fas fa-user"></i> {{user.login}}<span class="caret"></span>-->
+                            <!--</a>-->
+
+                            <!--<ul class="dropdown-menu">-->
+                                <!--<li><a href="/users/{{user._id}}">Profile</a></li>-->
+                                <!--<li><a href="/auth/logout">Logout</a></li>-->
+                            <!--</ul>-->
+                        <!--</li>-->
+                    <!--</li>-->
+
+                {{/user}}
+            </ul>
+        </div>
+    </div>
+</nav>

@@ -1,0 +1,45 @@
+<p>
+    <button type="button"
+            class="btn btn-default btn-sm"
+            onClick="dynamicInfo(1); return false;">
+        &laquo;
+    </button>
+
+    {{#beforePage}}
+        <button type="button"
+                class="btn btn-default btn-sm"
+                onClick="dynamicInfo({{.}}); return false;">
+            {{.}}
+        </button>
+    {{/beforePage}}
+
+    <button type="button"
+            class="btn btn-primary btn-sm"
+            onClick="dynamicInfo({{page}}); return false;">
+        {{page}}
+    </button>
+
+    {{#afterPage}}
+        <button type="button"
+                class="btn btn-default btn-sm"
+                onClick="dynamicInfo({{.}}); return false;">
+            {{.}}
+        </button>
+    {{/afterPage}}
+    <button type="button"
+            class="btn btn-default btn-sm"
+            onClick="dynamicInfo({{last}}); return false;">
+        &raquo;
+    </button>
+
+</p>
+
+<div class="list-group">
+    {{#raw}}
+        <a href="/collections/{{_id}}" class="list-group-item">
+            <h4 class="list-group-item-heading">{{name}}</h4>
+            <p class="list-group-item-text"><small>{{about}}</small></p>
+        </a>
+    {{/raw}}
+    {{^raw}}<h2><em>No collections</em></h2>{{/raw}}
+</div>

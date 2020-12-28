@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+    {{> head}}
+<body>
+    {{> header}}
+
+    <div class="container ">
+
+        <h1>{{pageTitle}}</h1>
+        <a class="btn btn-xs btn-primary" href="/collections/add" role="button">Add collection</a>
+
+        <hr>
+        <div id="app">
+            Loading...
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.0.1/mustache.min.js"></script>
+    <script src="/javascripts/collection-pagination.js"></script>
+</body>
+</html>

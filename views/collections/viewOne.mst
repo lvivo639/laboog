@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+{{> head}}
+<body>
+{{> header}}
+<div class="container">
+    <h1>{{name}}</h1>
+    <p>{{about}}</p>
+    {{#yourCollection}}
+        <a class="btn btn-primary" href="/collections/{{_id}}/add" role="button"><i class="fas fa-plus"></i>
+            Add book</a>
+
+
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+            <i class="far fa-edit"></i> Edit
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Edit collections</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form method="post" action="/collections/{{_id}}/edit">
+                            <div class="form-group">
+                                <label for="name">Name</label>
+                                <input required type="text" value="{{name}}" class="form-control" id="name" name="name"
+                                       placeholder="Name">
+                            </div>
+                            <div class="form-group">
+                                <label for="about">About</label>
+                                <textarea required name="about"
+                                          class="form-control"
+                                          id="about" rows="4"
+                                          placeholder="Write a little about the collection">{{about}}</textarea>
+                            </div>
+                            <br>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close
+                            </button>
+                            <button type="submit" class="btn btn-primary">Save changes</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <button type="button"
+                class="btn btn-danger"
+                data-toggle="modal"
+                data-target=".bs-example-modal-sm">
+            <i class="fas fa-trash-alt"></i> Delete
+        </button>
+
+        <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog"
+             aria-labelledby="mySmallModalLabel">
+            <div class="modal-dialog modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Wait!</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Are you sure?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <form action="/collections/{{_id}}/delete" method="post">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button class="btn btn-danger"
+                                    type="submit">
+                                <i class="fas fa-trash-alt"></i> Delete
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <a href="/users/{{creator}}/">Creator</a>
+    {{/yourCollection}}
+
+    <hr>
+    <h3>Books</h3>
+    <div class="row">
+        {{#collect}}
+            <div class="col-md-4">
+                <div class="media">
+                    <div class="media-left">
+                        <a href="/books/{{_id}}">
+                            <img class="media-object" src="{{image}}" alt="{{title}}" width="60"
+                                 height="90">
+                        </a>
+                    </div>
+                    <div class="media-body">
+                        {{#yourCollection}}
+                            <form action="/collections/{{collId}}/remove/{{_id}}" method="post">
+                                <button type="submit" class="close" aria-label="Close"><span
+                                        aria-hidden="true">&times;</span></button>
+                            </form>
+                        {{/yourCollection}}
+                        <h4 class="media-heading"><a href="/books/{{_id}}">
+                            {{title}}
+                        </a></h4>
+                        <small>by</small> {{author}}
+                    </div>
+                </div>
+
+                <br>
+            </div>
+        {{/collect}}
+        {{^collect}}
+            <div class="text-center">
+                <h4><em>Empty collection.</em></h4>
+            </div>
+        {{/collect}}
+    </div>
+</div>
+</body>
+</html>

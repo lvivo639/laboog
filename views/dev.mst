@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+{{> head}}
+<body>
+<h1>Available API's</h1>
+<div class="list-group">
+  <a href="/developer/v1/users" class="list-group-item">Users API</a>
+  <a href="/developer/v1/books" class="list-group-item">Books API</a>
+  <a href="/developer/v1/collections" class="list-group-item">Collections API</a>
+</div>
+
+</body>
+</html>

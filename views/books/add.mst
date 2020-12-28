@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+    {{> head}}
+<body>
+    {{> header}}
+    <div class="container">
+        <h1>{{pageTitle}}</h1>
+        <form method="post" enctype="multipart/form-data" action="/books/new">
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input required type="text" class="form-control" id="title" name="title" placeholder="Title">
+            </div>
+            <div class="form-group">
+                <label for="author">Author</label>
+                <input required type="text" class="form-control" id="author" name="author" placeholder="Author">
+            </div>
+            <div class="form-group">
+                <label for="about">About</label>
+                <textarea name="about"  class="form-control" id="about" rows="4" placeholder="Write a little about the book"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="buy">Link to purchase</label>
+                <input type="url" class="form-control" for="buy" name="buy" placeholder="Link">
+            </div>
+            <div class="form-group">
+                <label for="image">Image</label>
+                <input type="file" for="image" name="image" required>
+            </div>
+            
+            <button type="submit" class="btn btn-default">Submit</button>
+        </form> 
+    </div>
+</body>
+</html>

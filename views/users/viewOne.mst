@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+{{> head}}
+<body>
+{{> header}}
+<div class="container">
+
+    <div class="container target">
+        <div class="row">
+            <div class="col-sm-10">
+                <h1 class="">{{login}}</h1>
+
+                {{#myProfile}}
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+                        <i class="far fa-edit"></i> Edit Profile
+                    </button>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                            aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="myModalLabel">Edit my proifle</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="/users/{{_id}}/edit" method="POST">
+                                        <div class="form-group">
+                                            <label for="fullname">Full name</label>
+                                            <input type="text" class="form-control" id="fullname"
+                                                   placeholder="Full name"
+                                                   name="fullname" value="{{fullname}}">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="location">Location</label>
+                                            <input type="text" class="form-control" id="location" placeholder="Location"
+                                                   name="location" value="{{location}}">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="bio">About you</label>
+                                            <textarea class="form-control" rows="3" id="bio" placeholder="Bio"
+                                                      name="bio">{{bio}}</textarea>
+                                        </div>
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close
+                                        </button>
+                                        <button type="submit" class="btn btn-primary">Save changes</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {{/myProfile}}
+                <button type="button"
+                        class="btn btn-danger"
+                        data-toggle="modal"
+                        data-target=".bs-example-modal-sm">
+                    <i class="fas fa-trash-alt"></i> Delete Profile
+                </button>
+
+                <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog"
+                     aria-labelledby="mySmallModalLabel">
+                    <div class="modal-dialog modal-sm" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                        aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title">Wait!</h4>
+                            </div>
+                            <div class="modal-body">
+                                <p>Are you sure? You will not be able to dismiss it.</p>
+                            </div>
+                            <div class="modal-footer">
+                                <form action="/users/{{_id}}/delete" method="post">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    <button class="btn btn-danger"
+                                            type="submit">
+                                        <i class="fas fa-trash-alt"></i> Delete Profile
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+            </div>
+
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-sm-3">
+            <!--left col-->
+            <ul class="list-group">
+                <li class="list-group-item text-muted" contenteditable="false"><h3><strong>Profile</strong></h3></li>
+                <li class="list-group-item text-right"><span class="pull-left"><strong
+                        class="">Real name: </strong></span>
+                    {{#fullname}}
+                        {{.}}
+                    {{/fullname}}
+                    {{^fullname}}
+                        <small><em>No info.</em></small>
+                    {{/fullname}}
+                </li>
+                <li class="list-group-item text-right"><span class="pull-left"><strong
+                        class="">Location: </strong></span>
+                    {{#location}}
+                        {{.}}
+                    {{/location}}
+                    {{^location}}
+                        <small><em>No info.</em></small>
+                    {{/location}}
+
+                </li>
+                <li class="list-group-item text-right"><span class="pull-left"><strong
+                        class="">Role: </strong></span> {{role}}
+
+                </li>
+                <li class="list-group-item text-right"><span class="pull-left"><strong
+                        class="">Joined</strong></span> {{created}}
+                </li>
+            </ul>
+        </div>
+        <!--/col-3-->
+        <div class="col-sm-9" style="">
+            <div class="panel panel-default">
+                <div class="panel-heading">{{login}}'s Bio</div>
+                <div class="panel-body">
+                    {{#bio}}
+                        {{.}}
+                    {{/bio}}
+                    {{^bio}}
+                        <small><em>No info.</em></small>
+                    {{/bio}}
+                </div>
+            </div>
+            <div class="panel panel-default target">
+                <div class="panel-heading" contenteditable="false">Books</div>
+                <div class="panel-body">
+                    <div class="row">
+                        {{#books}}
+                            <div class="col-md-4">
+                                <div class="media">
+                                    <div class="media-left">
+                                        <a href="/books/{{_id}}">
+                                            <img class="media-object" src="{{image}}" alt="{{title}}" width="60"
+                                                 height="90">
+                                        </a>
+                                    </div>
+                                    <div class="media-body">
+                                        <h4 class="media-heading"><a href="/books/{{_id}}">{{title}}</a></h4>
+                                        <small>by</small> {{author}}
+                                    </div>
+                                </div>
+
+                                <br>
+                            </div>
+                        {{/books}}
+                        {{^books}}
+                            <div class="text-center">
+                                <h4>{{login}} hasn't added books yet.</h4>
+                            </div>
+                        {{/books}}
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default target">
+                <div class="panel-heading" contenteditable="false">Collections</div>
+                <div class="panel-body">
+                    {{#collections}}
+                        <a href="/collections/{{_id}}" class="list-group-item">
+                            <h4 class="list-group-item-heading">{{name}}</h4>
+                            <p class="list-group-item-text">{{about}}</p>
+                        </a>
+                    {{/collections}}
+
+                    {{^collections}}
+                        <div class="text-center">
+                            <h4>{{login}} hasn't added collections yet.</h4>
+                        </div>
+                    {{/collections}}
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
