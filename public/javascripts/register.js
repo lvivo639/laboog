@@ -3,10 +3,11 @@ console.log("Loading Browser JS app.js");
 function register() {
     fetch("/templates/loading.mst").then(x => x.text())
         .then(htmlStr => {
+            const form = new FormData(document.getElementById('reg-form'));
+
             const appEl = document.getElementById('app');
             appEl.innerHTML = htmlStr;
 
-            const form = new FormData(document.getElementById('reg-form'));
             Promise.all([
                 fetch("/templates/register.mst").then(x => x.text()),
                 fetch('/api/v1/users/create', {

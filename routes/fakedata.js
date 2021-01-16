@@ -1,9 +1,9 @@
 const express = require('express');
 const User = require('../models/user');
-const Book = require('./models/book');
-const Collection = require('./models/collection');
-
+const Book = require('../models/book');
+const Collection = require('../models/collection');
 const faker = require('faker');
+
 const router = express.Router();
 
 router.post('/fakeInfo',
@@ -40,79 +40,69 @@ router.post('/fakeInfo',
                             bio: faker.lorem.sentences()
                         });
 
-                        bcrypt.genSalt(10, (err, salt) => {
-                            bcrypt.hash(newUser.password, salt, (err, hash) => {
-                                if (err) throw err;
-                                newUser.password = hash;
-                                newUser.save()
-                                    .then(async user => {
-                                        const r = faker.random.number() % 7;
-                                        console.log(r, user.login);
-                                        for (let i = 0; i < r; i++) {
-                                            const im = faker.random.number() % imageUrls.length;
-                                            const book = new Book(
-                                                faker.random.words(),
-                                                faker.name.findName(),
-                                                faker.lorem.sentences(),
-                                                'http://i.ua',
-                                                imageUrls[im],
-                                                r,
-                                                user._id
-                                            );
-                                            console.log('book');
+                        const r = faker.random.number() % 7;
+                        console.log(r, user.login);
+                        for (let i = 0; i < r; i++) {
+                            const im = faker.random.number() % imageUrls.length;
+                            const book = new Book(
+                                faker.random.words(),
+                                faker.name.findName(),
+                                faker.lorem.sentences(),
+                                'http://i.ua',
+                                imageUrls[im],
+                                r,
+                                user._id
+                            );
+                            console.log('book');
 
-                                            await Book.insert(book)
-                                                .then(async book => {
-                                                    await User.findById(user.id)
-                                                        .then(async user => {
-                                                            await User.findByIdAndUpdate(user._id, {
-                                                                'books': [book._id, ...user.books]
+                            await Book.insert(book)
+                                .then(async book => {
+                                    await User.findById(user.id)
+                                        .then(async user => {
+                                            await User.findByIdAndUpdate(user._id, {
+                                                'books': [book._id, ...user.books]
 
-                                                            })
-                                                                .then((user) => console.log('ok'))
-                                                        })
+                                            })
+                                                .then((user) => console.log('ok'))
+                                        })
 
 
+                                })
+
+
+                        }
+
+                        const col = faker.random.number() % 6;
+                        for (let i = 0; i < col; i++) {
+                            await Book.getAll()
+                                .then(async books => {
+                                    const c = faker.random.number() % 15;
+                                    let array = [];
+                                    for (let i = 0; i < c; i++) {
+                                        const index = faker.random.number() % books.length;
+                                        array.push(books[index]);
+                                    }
+                                    const collection = new Collection(null,
+                                        faker.random.words() + " " + user.login,
+                                        faker.lorem.sentences(),
+                                        array,
+                                        user._id
+                                    );
+                                    await Collection.insert(collection)
+                                        .then(async collection => {
+                                            await User.findById(user.id)
+                                                .then(async user => {
+                                                    await User.findByIdAndUpdate(user._id, {
+                                                        'collections': [collection._id, ...user.collections]
+
+                                                    })
+                                                        .then((user) => console.log('coll user added'))
                                                 })
 
 
-                                        }
-
-                                        const col = faker.random.number() % 6;
-                                        for (let i = 0; i < col; i++) {
-                                            await Book.getAll()
-                                                .then(async books => {
-                                                    const c = faker.random.number() % 15;
-                                                    let array = [];
-                                                    for (let i = 0; i < c; i++) {
-                                                        const index = faker.random.number() % books.length;
-                                                        array.push(books[index]);
-                                                    }
-                                                    const collection = new Collection(null,
-                                                        faker.random.words() + " " + user.login,
-                                                        faker.lorem.sentences(),
-                                                        array,
-                                                        user._id
-                                                    );
-                                                    await Collection.insert(collection)
-                                                        .then(async collection => {
-                                                            await User.findById(user.id)
-                                                                .then(async user => {
-                                                                    await User.findByIdAndUpdate(user._id, {
-                                                                        'collections': [collection._id, ...user.collections]
-
-                                                                    })
-                                                                        .then((user) => console.log('coll user added'))
-                                                                })
-
-
-                                                        })
-                                                })
-                                        }
-
-                                    })
-                            })
-                        })
+                                        })
+                                })
+                        }
                     }
 
                 });
